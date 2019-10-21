@@ -9,9 +9,9 @@ class RootRouter extends Component {
     render () {
         return (
             <HashRouter>
-                <CustomNav></CustomNav>
+                
                 <Switch>
-                    <Redirect exact from='/' to='/admin'></Redirect>
+                    <Redirect exact from='/' to='/login'></Redirect>
                     <Route  path='/login' component={Login}></Route>
                     <Route  path='/admin' render={() => {
                         return (

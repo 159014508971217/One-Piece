@@ -7,6 +7,7 @@ class Admin extends Component {
             <div className='admin'>
                 <div className='admin-nav'>
                    这里是侧边栏
+                   <CustomNav></CustomNav>
                 </div>
                 <div className='admin-conent'>
                     <div>头部信息</div>

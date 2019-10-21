@@ -382,7 +382,8 @@ module.exports = function(webpackEnv) {
                   'babel-preset-react-app/webpack-overrides'
                 ),
                 
-                plugins: [
+                plugins: [ 
+                  ['import',{"libraryName": "antd", style: true }],
                   [
                     require.resolve('babel-plugin-named-asset-import'),
                     {
