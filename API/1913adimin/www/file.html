@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        img {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="file" id="file">
+    <img src="" alt="">
+    <button onclick="upload()">上传</button>
+</body>
+<script>
+    let serverpath = 'http://localhost:3000'
+
+    function upload() {
+        // 第一步获取图片内容
+        let file = $('#file')[0].files[0]
+        console.log(file)
+            // 第二部将图片存到formdate内部
+        let formdata = new FormData()
+        formdata.append('hehe', file)
+        console.log(formdata.get('hehe'))
+            // 第三部通过ajax进行上传
+        $.ajax({
+                method: 'post',
+                url: serverpath + '/admin/file/img',
+                data: formdata,
+                processData: false,
+                contentType: false,
+                cache: false,
+                success(res) {
+                    console.log(res)
+                    if (res.err === 0) {
+                        $('img').attr('src', res.imgpath)
+                    } else {
+                        alert(res.msg)
+                    }
+                }
+            })
+            // 第四部根据返回值显示缩略图
+    }
+</script>
+
+</html>

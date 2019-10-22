@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+        
+        .login {
+            width: 100%;
+            height: 400px;
+            background: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login">
+        <h1>欢迎来到登录页</h1>
+        <div class="input">
+            邮箱：<input placeholder="请输入邮箱账号" type="email" value="" class="us"><br>密码：<input placeholder="请输入密码" type="text" value="" class="ps"><br>验证码：<input placeholder="请输入验证码" type="text" value="" class="check"><br>
+        </div>
+        <div class="btn"><button class="log">登录</button><button class="reg">注册</button><button class="faso">发送验证码</button></div>
+    </div>
+    <script>
+        var serverpath = 'http://localhost:3000'
+        $('.log').on('click', () => {
+                const us = $('.us').val()
+                const ps = $('.ps').val()
+                $.ajax({
+                    url: serverpath + '/admin/user/checkMail',
+                    type: 'post',
+                    data: {
+                        us: us
+                    },
+                    success(res) {
+                        if (res.err === -1) {
+                            alert('你还没有注册 请先注册')
+                        }
+                    }
+                })
+            })
+            // 发送验证码
+        $('.faso').on('click', () => {
+                const us = $('.us').val()
+                console.log(us)
+                $.ajax({
+                    url: serverpath + '/admin/user/sendMail',
+                    type: 'post',
+                    data: {
+                        us: us
+                    },
+                    success(res) {
+                        if (res.err === 0) {
+                            alert('验证码发送成功')
+                        } else {
+                            alert('验证码发送失败')
+                        }
+                    }
+                })
+            })
+            // 点击注册
+        $('.reg').on('click', () => {
+                console.log(33)
+                const us = $('.us').val()
+                const code = $('.check').val()
+                const ps = $('.ps').val()
+                $.ajax({
+                    url: serverpath + '/admin/user/reg',
+                    type: 'post',
+                    data: {
+                        us: us,
+                        code: code,
+                        ps: ps
+                    },
+                    success(res) {
+                        if (res.err === 0) {
+                            alert('注册成功')
+                        } else {
+                            alert('注册失败')
+                        }
+                    }
+                })
+            })
+            // 点击登录
+        $('.log').on('click', () => {
+                const us = $('.us').val()
+                const ps = $('.ps').val()
+                $.ajax({
+                    url: serverpath + '/admin/user/login',
+                    type: 'post',
+                    data: {
+                        us: us,
+                        ps: ps
+                    },
+                    success(res) {
+                        if (res.err === 0) {
+                            alert('登陆成功')
+                            setTimeout('javascript:location.href = "./list.html"', 2000)
+                        } else {
+                            alert('邮箱或密码错误')
+                        }
+                    }
+                })
+            })
+            // $('.reg').on('click', () => {
+
+        //         const us = $('.us').val()
+        //         const ps = $('.ps').val()
+        //         $.ajax({
+        //             url: serverpath + 'admin/user/reg',
+        //             data:
+        //         })
+        //     })
+        //         if (res.err === 0) {
+
+        //             $.ajax({
+        //                 url: serverpath + '/admin/user/login',
+        //                 type: 'post',
+        //                 data: {
+        //                     us: us,
+        //                     ps: ps
+        //                 },
+        //                 success(res) {
+        //                     if (res.err === 0) {
+        //                         alert('登陆成功')
+        //                         setTimeout('javascript:location.href = "./list.html"', 2000)
+        //                     } else {
+        //                         alert('邮箱账号或密码错误')
+        //                     }
+        //                     console.log(res)
+        //                 }
+        //             })
+        //         } else {
+        //             alert('您还没有注册请先注册再登陆')
+        //             $.ajax({
+        //                 url : serverpath + '/admin/user/reg',
+        //                 type: 'post',
+        //                 data: {
+
+        //                 }
+        //             })
+        //         }
+
+        //     }
+        // })
+    </script>
+</body>
+
+</html>
