@@ -1,82 +1,96 @@
+import React, { Component, Fragment, PureComponent } from 'react';
 
-import React, { Component } from 'react';
-// 编程式导航   需要路有对象
-
-import {withRouter} from 'react-router-dom'
-import { Menu, Icon, Button } from 'antd';
-const { SubMenu } = Menu;
-// import './index.less'
-// import { Button } from 'antd'
-class CustomNav extends Component {
-    state = {
-        collapsed: false,
-    };
-
-    toggleCollapsed = () => {
-        this.setState({
-            collapsed: !this.state.collapsed,
-        });
-    };
-
+// 引入anted  UI框架
+import { Icon } from 'antd';
+import 'antd/dist/antd.css';
+// 引入router 
+import { HashRouter, NavLink, Route, Switch, Redirect } from 'react-router-dom'
+import './index.less';
+class customnav extends Component {
+    constructor() {
+        super()
+        this.state = {
+            list: [
+                { type1: "smile", text: "Dashboard", type2: "down" },
+                { type1: "form", text: "表单页", type2: "down" },
+                { type1: "profile", text: "列表页", type2: "down" }
+            ],
+            list2: [
+                [{ text: "分析页", path: '/admin/user', }, { text: "监控页", path: '/login/2' }, { text: "工作台", path: '/login/3' }],
+                [{ text: "基础表单", path: '/reg/1' }, { text: "分布表单", path: '/reg/2' }, { text: "高级表单", path: '/reg/3' }],
+                [{ text: "搜索列表", path: '/user/1' }, { text: "查询列表", path: '/user/2' }, { text: "表格列表", path: '/user/3' }, { text: "卡片列表", path: '/user/4' }]
+            ],
+            show: { dom: 0, boolean: false },
+        }
+    }
+    shows = (index, e) => {
+        let show = {}
+        let n = index.index
+        show.dom = n
+        if (n === this.state.show.dom) {
+            show.boolean = !this.state.show.boolean
+            if (show.boolean) {
+                this.refs[n - 0].className = 'lit'
+            } else {
+                this.refs[n - 0].className = 'list'
+            }
+        } else {
+            if (this.state.show.boolean) {
+                show.boolean = this.state.show.boolean
+                for (let i = 0; i < this.state.list.length; i++) {
+                    this.refs[i - 0].className = 'list'
+                }
+                this.refs[n - 0].className = 'lit'
+            } else {
+                show.boolean = !this.state.show.boolean
+                if (show.boolean) {
+                    this.refs[n - 0].className = 'lit'
+                } else {
+                    this.refs[n - 0].className = 'list'
+                }
+            }
+        }
+        // console.log(show)
+        // console.log(this.refs)
+        this.setState({ show: show })
+    }
     render() {
         return (
-            <div style={{ width: 256 }}>
-                <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
-                    <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} />
-                </Button>
-                <Menu
-                    defaultSelectedKeys={['1']}
-                    defaultOpenKeys={['sub1']}
-                    mode="inline"
-                    theme="dark"
-                    inlineCollapsed={this.state.collapsed}
-                >
-                    <Menu.Item key="1">
-                        <Icon type="pie-chart" />
-                        <span>Option 1</span>
-                    </Menu.Item>
-                    <Menu.Item key="2">
-                        <Icon type="desktop" />
-                        <span>Option 2</span>
-                    </Menu.Item>
-                    <Menu.Item key="3">
-                        <Icon type="inbox" />
-                        <span>Option 3</span>
-                    </Menu.Item>
-                    <SubMenu
-                        key="sub1"
-                        title={
-                            <span>
-                                <Icon type="mail" />
-                                <span>Navigation One</span>
-                            </span>
-                        }
-                    >
-                        <Menu.Item key="5">Option 5</Menu.Item>
-                        <Menu.Item key="6">Option 6</Menu.Item>
-                        <Menu.Item key="7">Option 7</Menu.Item>
-                        <Menu.Item key="8">Option 8</Menu.Item>
-                    </SubMenu>
-                    <SubMenu
-                        key="sub2"
-                        title={
-                            <span>
-                                <Icon type="appstore" />
-                                <span>Navigation Two</span>
-                            </span>
-                        }
-                    >
-                        <Menu.Item key="9">Option 9</Menu.Item>
-                        <Menu.Item key="10">Option 10</Menu.Item>
-                        <SubMenu key="sub3" title="Submenu">
-                            <Menu.Item key="11">Option 11</Menu.Item>
-                            <Menu.Item key="12">Option 12</Menu.Item>
-                        </SubMenu>
-                    </SubMenu>
-                </Menu>
-            </div>
-        );
+            <Fragment>
+                <ul>
+                    {
+                        this.state.list.map((item, index) => {
+                            return (
+                                <li key={index}>
+                                    <div onClick={this.shows.bind(this, { index })} ref={index} className='list'>
+                                        <div>
+                                            <Icon type={item.type1} />
+                                            <span>{item.text}</span>
+                                        </div>
+                                        <Icon className="cente" type={item.type2} />
+                                    </div>
+                                    {
+                                        this.state.show.dom === index && this.state.show.boolean ?
+                                            <div className="list2">
+                                                {
+                                                    this.state.list2[index].map((item2, index2) => {
+                                                        return (
+                                                            <HashRouter>
+                                                                <NavLink className="list21" to={item2.path} activeClassName='list2-1' key={index2} >{item2.text}</NavLink>
+                                                            </HashRouter>
+                                                        )
+                                                    })
+                                                }
+                                            </div> : ''
+                                    }
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
+            </Fragment>
+        )
     }
 }
 
-export default withRouter(CustomNav) 
+export default customnav;

@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {HashRouter, Switch, Redirect, Route, NavLink} from 'react-router-dom'
-import CustomNav from './Component/customnav'
+
 import Login from './Component/login'
 import Admin from './Component/admin'
 import Home from './Component/home'
