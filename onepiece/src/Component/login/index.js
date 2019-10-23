@@ -34,7 +34,7 @@ class Login extends React.Component {
        console.log(this,'登录')
        let {getFieldDecorator} = this.props.form
       return (
-        <Card style={{width:'400px',position:'fixed',top:'200px',left:'50%',transform:'translateX(-200px)'}}>
+        <Card style={{width:'400px',position:'fixed',top:'200px',left:'50%',transform:'translateX(-50%)'}}>
         <div onSubmit={this.handleSubmit} className="login-form">
           <Form.Item>
            {getFieldDecorator('Us',{
