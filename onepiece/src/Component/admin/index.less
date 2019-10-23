@@ -7,7 +7,64 @@
     };
     .admin-conent {
         flex: 1;
+        display: flex;
+        position: relative;
+    };
+    .header {
+        height: 70px;
+        width: 100%;
+        background: pink;
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        top: 0;
+    };
+    .footer {
+        height: 100px;
+        width: 100%;
         background: #333;
+        position: absolute;
+        bottom: 0;
+    };
+    .admin-conent-conent {
+        flex: 1;
+        margin: 70px 0 100px 0;
     }
+}
+.herder-left {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    .touxiang {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: block;
+            img {
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+    };
+    .gender {
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 8px;
+    };
+    div {
+        margin-left: 40px;
+        input {
+            margin-left: 10px;
+        }
+    }
+}
+.header-right {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
 }
 

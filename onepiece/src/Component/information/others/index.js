@@ -5,7 +5,7 @@ class User extends Component {
     render() {
         return (
             <div>
-                这里是员工信息页面
+                这里是管理的用户页面
             </div>
         )
     }
