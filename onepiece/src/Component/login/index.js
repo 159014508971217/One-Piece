@@ -14,17 +14,22 @@ class Login extends React.Component {
            if(err){
                message.error("输入信息有误")
            }else{
-              this.$axios.get('/wy/admin/login/login',{params:{us:reslt.Us,ps:reslt.Ps}}
+              this.$axios.get('/wy/admin/login',{params:{us:reslt.Us,ps:reslt.Ps}}
              
               )
               .then((data)=>{
                 console.log(data)
-
-              })
-             /*  message.success("登陆成功",1,()=>{
+                if(!data.data.err){
+                   message.success("登陆成功",1,()=>{
 
                    this.props.history.push('/admin')
-               }) */
+               })
+                }else
+                message.error("输入信息有误")
+
+
+              })
+             
            }
        })
 
@@ -40,7 +45,7 @@ class Login extends React.Component {
            {getFieldDecorator('Us',{
                 rules: [{ required: true, message: '请输入你的用户名' } ,
                 { min:3,message:'用户名长度6到9位' },
-                { max:9,message:'用户名长度6到9位' }],
+                { max:20,message:'用户名长度6到9位' }],
                       
            })(
              <Input

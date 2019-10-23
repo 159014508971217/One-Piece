@@ -36,6 +36,13 @@ class reg extends React.Component {
    this.props.form.validateFields((err,data)=>{
      console.log(data)
      console.log(this.state.imageUrl)
+     if(err){
+
+     }else{
+      this.$axios.post('/wy/admin/reg',{us:data.us,ps:data.ps,name:data.name,sexy:data.sexy, img:this.state.imageUrl})
+             
+      
+     }
    })
 }
 handleConfirmBlur = e => {
