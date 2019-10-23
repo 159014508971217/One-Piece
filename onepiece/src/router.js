@@ -1,10 +1,12 @@
 import React, {Component, Fragment} from 'react'
 import {HashRouter, Switch, Redirect, Route, NavLink} from 'react-router-dom'
+import Componentimporent from './untils/componentimporent'
+const Others = Componentimporent(() => import('./Component/information/others'))
 
-import Login from './Component/login'
-import Admin from './Component/admin'
-import Home from './Component/home'
-import User from './Component/user'
+const Login = Componentimporent(() => import('./Component/login'))
+const Admin = Componentimporent(() => import('./Component/admin'))
+const Home = Componentimporent(() => import('./Component/home'))
+const User = Componentimporent(() => import('./Component/information/user'))
 class RootRouter extends Component {
     render () {
         return (
@@ -17,7 +19,9 @@ class RootRouter extends Component {
                         return (
                             <Admin>
                                 <Route  path='/admin/home' component={Home}></Route>
-                                <Route  path='/admin/user' component={User}></Route>
+                                {/* <Route  path='/admin/information/user' component={User}></Route> */}
+                                <Route  path='/admin/information/others' component={Others}></Route>
+                                <Route  path='/admin/information/user' component={User}></Route>
                             </Admin>
                         )
                     }}></Route>

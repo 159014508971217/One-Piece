@@ -13,12 +13,12 @@ class customnav extends Component {
             list: [
                 { type1: "smile", text: "Dashboard", type2: "down" },
                 { type1: "form", text: "表单页", type2: "down" },
-                { type1: "profile", text: "列表页", type2: "down" }
+                { type1: "user", text: "员工信息中心", type2: "down" }
             ],
             list2: [
                 [{ text: "分析页", path: '/admin/user', }, { text: "监控页", path: '/login/2' }, { text: "工作台", path: '/login/3' }],
                 [{ text: "基础表单", path: '/reg/1' }, { text: "分布表单", path: '/reg/2' }, { text: "高级表单", path: '/reg/3' }],
-                [{ text: "搜索列表", path: '/user/1' }, { text: "查询列表", path: '/user/2' }, { text: "表格列表", path: '/user/3' }, { text: "卡片列表", path: '/user/4' }]
+                [{ text: "个人信息", path: '/admin/information/user' }, { text: "公司员工信息", path: '/admin/information/others' }]
             ],
             show: { dom: 0, boolean: false },
         }
